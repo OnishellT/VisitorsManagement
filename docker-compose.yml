@@ -6,11 +6,11 @@ services:
       context: .
       dockerfile: Dockerfile
     image: cloudsigma.com/php
-    container_name: app
+    container_name: sisvisitas
     restart: unless-stopped
     tty: true
     environment:
-      SERVICE_NAME: app
+      SERVICE_NAME: sisvisitas
       SERVICE_TAGS: dev
     working_dir: /var/www/html/
     volumes:
