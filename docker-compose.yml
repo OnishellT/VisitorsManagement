@@ -36,7 +36,7 @@ services:
   # MySQL Service
   db:
     image: mysql:5.7.32
-    container_name: db
+    container_name: mysqldatabsevisitas
     restart: unless-stopped
     tty: true
     ports:
