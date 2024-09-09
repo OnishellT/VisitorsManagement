@@ -26,7 +26,7 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - '81:80' # Map host port 81 to container port 80
+      - '81:81' # Map host port 81 to container port 80
     volumes:
       - ./:/var/www/html/
       - ./nginx/conf.d/:/etc/nginx/conf.d/
