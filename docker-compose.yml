@@ -6,11 +6,11 @@ services:
       context: .
       dockerfile: Dockerfile
     image: cloudsigma.com/php
-    container_name: sisvisitas
+    container_name: app
     restart: unless-stopped
     tty: true
     environment:
-      SERVICE_NAME: sisvisitas
+      SERVICE_NAME: app
       SERVICE_TAGS: dev
     working_dir: /var/www/html/
     volumes:
@@ -22,7 +22,7 @@ services:
   # Nginx Service
   webserver:
     image: nginx:alpine
-    container_name: nginxserver
+    container_name: webserver
     restart: unless-stopped
     tty: true
     ports:
@@ -36,7 +36,7 @@ services:
   # MySQL Service
   db:
     image: mysql:5.7.32
-    container_name: mysqldatabsevisitas
+    container_name: db
     restart: unless-stopped
     tty: true
     ports:
