@@ -1,7 +1,6 @@
 version: '2.0'
 services:
-
-  #PHP Service
+  # PHP Service
   app:
     build:
       context: .
@@ -20,31 +19,30 @@ services:
     networks:
       - app-network
 
-  #Nginx Service
+  # Nginx Service
   webserver:
     image: nginx:alpine
     container_name: webserver
     restart: unless-stopped
     tty: true
     ports:
-      - "80:80"
-      - "443:443"
+      - '81:80' # Map host port 81 to container port 80
     volumes:
       - ./:/var/www/html/
       - ./nginx/conf.d/:/etc/nginx/conf.d/
     networks:
       - app-network
 
-  #MySQL Service
+  # MySQL Service
   db:
     image: mysql:5.7.32
     container_name: db
     restart: unless-stopped
     tty: true
     ports:
-      - "3306:3306"
+      - '3307:3306' # Fix MySQL port mapping to the default port
     environment:
-      MYSQL_DATABASE: laravel_web
+      MYSQL_DATABASE: visitorpass
       MYSQL_ROOT_PASSWORD: 123456789
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
@@ -54,11 +52,12 @@ services:
     networks:
       - app-network
 
-#Docker Networks
+# Docker Networks
 networks:
   app-network:
     driver: bridge
-#Volumes
+
+# Volumes
 volumes:
   dbdata:
     driver: local
