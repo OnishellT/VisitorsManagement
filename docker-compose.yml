@@ -45,7 +45,7 @@ services:
       MYSQL_DATABASE: visitorpass
       MYSQL_ROOT_PASSWORD: 123456789
       SERVICE_TAGS: dev
-      SERVICE_NAME: mysql
+      SERVICE_NAME: mysql-server
     volumes:
       - dbdata:/var/lib/mysql/
       - ./mysql/my.cnf:/etc/mysql/my.cnf
