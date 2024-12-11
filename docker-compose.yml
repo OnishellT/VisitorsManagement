@@ -18,6 +18,12 @@ services:
       - ./php/laravel.ini:/usr/local/etc/php/conf.d/laravel.ini
     networks:
       - app-network
+    entrypoint: |
+      bash -c "
+        chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache && \
+        chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache && \
+        php-fpm
+      "
 
   # Nginx Service
   webserver:
@@ -26,7 +32,7 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - '8080:80' # Map host port 81 to container port 80
+      - '8080:80'
     volumes:
       - ./:/var/www/html/
       - ./nginx/conf.d/:/etc/nginx/conf.d/
@@ -40,7 +46,7 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - '3306:3306' # Fix MySQL port mapping to the default port
+      - '3306:3306'
     environment:
       MYSQL_DATABASE: visitorpass
       MYSQL_ROOT_PASSWORD: 123456789
