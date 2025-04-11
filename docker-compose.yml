@@ -32,26 +32,7 @@ services:
       - ./nginx/conf.d/:/etc/nginx/conf.d/
     networks:
       - app-network
-
-  # MySQL Service
-  db:
-    image: mysql:5.7.32
-    container_name: db
-    restart: unless-stopped
-    tty: true
-    ports:
-      - '3306:3306' # Fix MySQL port mapping to the default port
-    environment:
-      MYSQL_DATABASE: visitorpass
-      MYSQL_ROOT_PASSWORD: 123456789
-      SERVICE_TAGS: dev
-      SERVICE_NAME: mysql-server
-    volumes:
-      - dbdata:/var/lib/mysql/
-      - ./mysql/my.cnf:/etc/mysql/my.cnf
-    networks:
-      - app-network
-
+      
 # Docker Networks
 networks:
   app-network:
