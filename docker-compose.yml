@@ -30,7 +30,7 @@ services:
       - '8080:80'  # Host port 8080 -> Container port 80
     volumes:
       - ./:/var/www/html/
-      #- ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
     networks:
       - app-network
 
