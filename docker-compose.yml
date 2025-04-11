@@ -1,4 +1,5 @@
-version: '2.0'
+version: '3.8'
+
 services:
   # PHP Service
   app:
@@ -18,26 +19,26 @@ services:
       - ./php/laravel.ini:/usr/local/etc/php/conf.d/laravel.ini
     networks:
       - app-network
-  
-   # MySQL Service
-   db:
-     image: mysql:5.7.32
-     container_name: db
-     restart: unless-stopped
-     tty: true
-     ports:
-       - '3306:3306' # Fix MySQL port mapping to the default port
-     environment:
-       MYSQL_DATABASE: visitorpass
-       MYSQL_ROOT_PASSWORD: 123456789
-       SERVICE_TAGS: dev
-       SERVICE_NAME: mysql-server
-     volumes:
-       - dbdata:/var/lib/mysql/
-       - ./mysql/my.cnf:/etc/mysql/my.cnf
-     networks:
-       - app-networ
-       
+
+  # MySQL Service
+  db:
+    image: mysql:5.7.32
+    container_name: db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_DATABASE: visitorpass
+      MYSQL_ROOT_PASSWORD: 123456789
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql-server
+    volumes:
+      - dbdata:/var/lib/mysql/
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - app-network
+
   # Nginx Service
   webserver:
     image: nginx:alpine
@@ -45,19 +46,19 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - '8080:80' # Map host port 81 to container port 80
+      - '8080:80'  # Host port 8080 -> Container port 80
     volumes:
       - ./:/var/www/html/
       - ./nginx/conf.d/:/etc/nginx/conf.d/
     networks:
       - app-network
-      
+
 # Docker Networks
 networks:
   app-network:
     driver: bridge
 
-# Volumes
+# Docker Volumes
 volumes:
   dbdata:
     driver: local
